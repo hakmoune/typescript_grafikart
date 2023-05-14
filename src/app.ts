@@ -1,4 +1,72 @@
-/*const a: string = "Hello";
+//Create your own Type - "Alias"
+type User = { firstname: string; lastname: string };
+const user: User = { firstname: "Mahdi", lastname: "Hakmoune" };
+
+const compteur = document.querySelector("#compteur");
+
+//Generics Types
+//Au lieu de creer une fonction ou param avec le type any, on utilise le Generics Type
+function identity<ArgType>(arg: ArgType): ArgType {
+  return arg;
+}
+
+const aa = identity<number>(3);
+const aaa = identity(3);
+const aaaa = identity<string>("3");
+
+//Si on utilise ce syntaxe alors on va s'assurer qu'il vas pa eter null est pas besoin de faire la verification "?"
+//C'est comme on dit que compteur existe a 100%
+//Pour la partique, c'est de bonne pratique
+//const compteur = document.querySelector("#compteur")!;
+//const compteur = document.querySelector("#compteur") as HTMLButtonElement;
+
+let i = 0;
+
+const increment = (e: Event) => {
+  e.preventDefault();
+  i++;
+
+  const span = compteur?.querySelector("span");
+
+  //Span peut etre de type: HTMLSpanElement | Null | Undifined
+  //Avec la condition if on s'assure que le type va etre : HTMLSpanElement
+  if (span) {
+    span.innerText = i.toString();
+  }
+};
+
+compteur?.addEventListener("click", increment);
+
+/*function printId2(id: number | string) {
+  if (typeof id === "number") {
+    console.log((id * 2).toString());
+  } else {
+    console.log(id.toUpperCase());
+  }
+}
+
+function exemple(a: string | boolean, b: string | number | boolean) {
+  if (a === b) {
+  }
+}
+function exemple2(a: string | Date) {
+  if (a instanceof Date) {
+  }
+}
+function exemple3(a: string | string[]) {
+  if (Array.isArray(a)) {
+    return a[0];
+  }
+  return a;
+}
+
+function exemple4(a: MouseEvent | HTMLInputElement) {
+  if ("value" in a) {
+    //Traitement, ici il va conaitre que a est de type HTMLInputElement
+  }
+}
+
+const a: string = "Hello";
 const n: number = 0;
 const b: boolean = true;
 const d: null = null; // Une valeur null
@@ -31,19 +99,4 @@ function printId(id: number | string): void {
   console.log(id.toString());
 }*/
 
-const compteur = document.querySelector("#compteur");
-let i = 0;
-
-const increment = (e: Event) => {
-  e.preventDefault();
-  i++;
-
-  const span = compteur?.querySelector("span");
-  if (span) {
-    span.innerText = i.toString();
-  }
-};
-
-compteur?.addEventListener("click", increment);
-
-//https://www.youtube.com/watch?v=wxZ9mv5kbgo&list=PLjwdMgw5TTLX1tQ1qDNHTsy_lrkCt4VW3&index=4
+// https://www.youtube.com/watch?v=dB_LbNMgVAA&list=PLjwdMgw5TTLX1tQ1qDNHTsy_lrkCt4VW3&index=5
